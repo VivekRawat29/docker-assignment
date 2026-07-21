@@ -1,0 +1,6 @@
+frontend/node_modules/
+backend/venv/
+.vscode/
+__pycache__/
+*.pyc
+*.log
