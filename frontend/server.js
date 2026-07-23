@@ -29,9 +29,9 @@ app.get("/", (req, res) => {
 app.post("/submit", async (req, res) => {
 
   try {
-
+const BACKEND_URL = process.env.BACKEND_URL || "http://backend:5000";
     const response = await axios.post(
-      "http://backend:5000/submit",
+     `${BACKEND_URL}/submit`,
       req.body
     );
 
