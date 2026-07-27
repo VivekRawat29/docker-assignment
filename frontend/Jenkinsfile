@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                dir('frontend') {
+                    sh '''
+                        npm install
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy Express') {
+            steps {
+                dir('frontend') {
+                    sh '''
+                        pm2 delete express-frontend || true
+                        pm2 start server.js --name express-frontend
+                        pm2 save
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Express frontend deployed successfully!'
+        }
+
+        failure {
+            echo 'Express frontend deployment failed!'
+        }
+    }
+}
